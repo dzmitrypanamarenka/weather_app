@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../styles/App.css';
-import MapContainer from './MapContainer';
-import axios from 'axios';
+import MapContainer from '../containers/MapContainer';
 
 class App extends Component {
   render() {

@@ -1,27 +1,32 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { reducer as formReducer } from 'redux-form';
-import _ from 'lodash';
 import * as actions from '../actions/';
 
-const options = handleActions({
-  [actions.updateMap](state, { payload: { coords }}) {
-    console.log(coords)
-    return { ...state, coords };
-  },
-  // [actions.removeTask](state, { payload: { id } }){
-  //   return _.omit(state, id);
-  // },
-  // [actions.changeStatus](state, { payload: { id } }){
-  //   const newStatus = state[id].status === 'active' ? 'done' : 'active';
-  //   const task = { ...state[id], status: newStatus };
-  //   return { ...state, [id]: task};
-  // }
-}, {coords: {
+const defaultLocation = {
+  coords: {
     lat: 40.854885,
     lng: -88.081807
-  }, zoom: 7 });
+  },
+  zoom: 16 };
+const defaultInfo = { visibility: false, content: 'You\'re here' };
+
+const options = handleActions({
+  [actions.updateMap](state, { payload: { coords } }) {
+    return { ...state, coords };
+  },
+}, { zoom: 16 });
+
+const info = handleActions({
+  [actions.updateInfo](state, { payload: { info } }) {
+    return { ...state, ...info };
+  },
+  [actions.sendError](state, { payload: { message } }) {
+    console.log(message);
+    return { ...state, content: message };
+  }
+}, defaultInfo);
 
 export default combineReducers({
-  options
+  options,
+  info
 })

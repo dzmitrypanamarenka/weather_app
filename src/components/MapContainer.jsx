@@ -1,39 +1,52 @@
 import React from 'react';
-import { Map } from 'google-maps-react';
+import { Map, Marker, InfoWindow } from 'google-maps-react';
 import _ from 'lodash';
+import * as errors from '../lib/errors';
 
 export default class MapContainer extends React.Component {
-  getCoords(){
+  getCoords = () => {
     if(!navigator.geolocation){
-      return this.props.sendError({ status: false });
+      return this.updateInfo(new errors.GeoAbsence());
     }
     navigator.geolocation.getCurrentPosition(position => {
       const coords = {
         lat: position.coords.latitude,
-        lng: position.coords.longtitude
+        lng: position.coords.longitude
       };
-      if(_.isEqual(this.props.coords, coords)){
+      if(_.isEqual(this.props.options.coords, coords)){
         return false;
       }
       this.props.updateMap(coords);
     }, () => {
-      this.props.sendError({ status: true });
+      this.updateInfo(new errors.GeoFailed());
     })
-  }
+  };
+  updateInfo = infoProps => (e, d) => {
+    console.log(d)
+    if(infoProps instanceof Error){
+      return this.props.sendError(infoProps.message);
+    }
+    this.props.updateInfo(infoProps);
+  };
   render(){
-    // const initialState = {
-    //     lat: 40.854885,
-    //     lng: -88.081807
-    // };
-    console.log(this.props)
-    const coords = this.props.coords;
-    const googleApi = this.props.google;
-    const zoom = this.props.zoom;
     this.getCoords();
+    const { coords, zoom } = this.props.options;
+    const { visibility, content } = this.props.info;
+    const { google } = this.props;
+
     return <div id='map'>
-      <Map google={ googleApi }
+      <Map google={ google }
            center={ coords }
-           zoom={ zoom }/>
+           zoom={ zoom }
+           onClick={ visibility ? this.updateInfo({ visibility: false }) : null }>
+        <Marker name={'Your position'}
+                position={ coords }
+                onClick={ this.updateInfo({ visibility: true }) }/>
+        <InfoWindow position={ coords }
+                    visible={ visibility }>
+          <h1>{ content }</h1>
+        </InfoWindow>
+      </Map>
     </div>
   }
 };
