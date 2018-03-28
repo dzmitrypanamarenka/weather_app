@@ -26,11 +26,11 @@ const forecast = handleActions({
   [actions.forecastRequest](state) {
     return { ...state, forecastStatus: 'requesting' };
   },
-  [actions.forecastSuccess](state, { payload: { data } }) {
-    return { ...state, forecastStatus: 'success', forecast: data };
+  [actions.forecastSuccess](state, { payload }) {
+    return { ...state, forecastStatus: 'success', forecastData: payload };
   },
   [actions.forecastFailure](state, { payload: { error } }) {
-    return { ...state, forecastStatus: 'failure', forecast: error}
+    return { ...state, forecastStatus: 'failure', forecastData: error}
   }
 }, {});
 

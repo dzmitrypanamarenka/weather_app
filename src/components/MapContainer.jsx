@@ -2,7 +2,6 @@ import React from 'react';
 import Map from '../containers/Map';
 import Marker from '../containers/Marker';
 import InfoWindow from '../containers/InfoWindow';
-import * as errors from '../lib/errors';
 
 export default class MapContainer extends React.Component {
   bindEvents = () => {
