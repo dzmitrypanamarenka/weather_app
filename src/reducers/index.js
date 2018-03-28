@@ -22,7 +22,20 @@ const info = handleActions({
   }
 }, defaultInfo);
 
+const forecast = handleActions({
+  [actions.forecastRequest](state) {
+    return { ...state, forecastStatus: 'requesting' };
+  },
+  [actions.forecastSuccess](state, { payload: { data } }) {
+    return { ...state, forecastStatus: 'success', forecast: data };
+  },
+  [actions.forecastFailure](state, { payload: { error } }) {
+    return { ...state, forecastStatus: 'failure', forecast: error}
+  }
+}, {});
+
 export default combineReducers({
   options,
-  info
+  info,
+  forecast
 })
