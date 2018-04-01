@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Router, Route } from 'react-router-dom';
-import browserHistory from 'history/createBrowserHistory'
+import browserHistory from 'history/createBrowserHistory';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers/index';
@@ -24,8 +26,7 @@ render(
     <Provider store={store}>
       <Router history={ history }>
         <div>
-          <App/>
-          <Route exact path="/" component={ MapContainer }/>
+          <Route exact path="/" component={ App }/>
           <Route path="/weather" component={ Weather }/>
         </div>
       </Router>

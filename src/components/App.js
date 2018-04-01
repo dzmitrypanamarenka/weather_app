@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+
+import React, {Component} from 'react';
 import logo from '../logo.svg';
 import '../styles/App.css';
-import MapContainer from '../containers/MapContainer';
 import _ from 'lodash';
 import * as errors from "../lib/errors";
+import MapContainer from '../containers/MapContainer';
 
 class App extends Component {
   getCoords = () => {
     const { sendError, updateMap, options } = this.props;
 
-    if(!navigator.geolocation){
+    if (!navigator.geolocation) {
       return sendError(new errors.GeoAbsence());
     }
     navigator.geolocation.getCurrentPosition(position => {
@@ -17,7 +18,7 @@ class App extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      if(_.isEqual(options.coords, coords)){
+      if (_.isEqual(options.coords, coords)) {
         return false;
       }
       updateMap(coords);
@@ -25,19 +26,22 @@ class App extends Component {
       sendError(new errors.GeoFailed());
     })
   };
-  componentDidMount(){
+
+  componentDidMount() {
     this.getCoords();
   }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {/*<header className="App-header">*/}
+          {/*<img src={logo} className="App-logo" alt="logo"/>*/}
+          {/*<h1 className="App-title">Welcome to React</h1>*/}
+        {/*</header>*/}
+        {/*<p className="App-intro">*/}
+          {/*To get started, edit <code>src/App.js</code> and save to reload.*/}
+        {/*</p>*/}
+        <MapContainer/>
       </div>
     );
   }

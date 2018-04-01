@@ -5,6 +5,9 @@ export default class Weather extends Component {
   checkWeather = (coords) => {
     this.props.receiveForecast(coords);
   };
+  componentDidMount() {
+    this.checkWeather(this.props.options.coords);
+  }
   componentWillReceiveProps(nextProps){
     const newCoords = nextProps.options.coords;
     const actualCoords = this.props.options.coords;
@@ -15,7 +18,7 @@ export default class Weather extends Component {
   render() {
     const { forecastData } = this.props.forecast;
     if(!forecastData){
-      return null;
+      return <div>hui</div>;
     }
     const toStrings = Object.keys(forecastData).map((el) => `${[el]}: ${forecastData[el]}`);
     return <div>{toStrings}</div>
