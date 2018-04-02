@@ -31,7 +31,6 @@ export default class Weather extends Component {
 
   render() {
     console.log('Weather: render')
-    this.checkWeather(coords)
     const {forecastData} = this.props.forecast;
 
     if (!forecastData) {
@@ -39,9 +38,9 @@ export default class Weather extends Component {
     }
     const iconLink = getIconLink(forecastData.weather);
     return <Jumbotron>
-      <h2>{forecastData.name}</h2>
-      <h1>{forecastData.main.temp}</h1>
-      <img src={iconLink}/>
+      <h2 className="title -place">{forecastData.name}</h2>
+      <h1 className="title -temp">{forecastData.main.temp}</h1>
+      <img className="image" src={iconLink}/>
       <ul className="list">
         <li className="item">
           <span className="label">Humidity</span>

@@ -25,7 +25,7 @@ const store = createStore(
 render(
     <Provider store={store}>
       <Router history={ history }>
-        <div>
+        <div className="router-wrap">
           {/*<App/>*/}
           <Route exact path="/" component={ MapContainer }/>
           <Route path="/weather" component={ Weather }/>
