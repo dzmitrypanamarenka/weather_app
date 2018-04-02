@@ -26,7 +26,8 @@ render(
     <Provider store={store}>
       <Router history={ history }>
         <div>
-          <Route exact path="/" component={ App }/>
+          {/*<App/>*/}
+          <Route exact path="/" component={ MapContainer }/>
           <Route path="/weather" component={ Weather }/>
         </div>
       </Router>

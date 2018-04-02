@@ -15,7 +15,12 @@ export const forecastFailure = createAction('FORECAST_FAILURE');
 export const receiveForecast = coords => async (dispatch) => {
   dispatch(forecastRequest);
   try{
-    const query = querystring.stringify({ lat: coords.lat, lon: coords.lng, APPID: '62b009e52319a77cd12a33cf560d91f8'});
+    const query = querystring.stringify({
+        lat: coords.lat,
+        lon: coords.lng,
+        APPID: '62b009e52319a77cd12a33cf560d91f8',
+        units: 'metric'
+    });
     const response = await axios.get(url.format({
       protocol: 'https:',
       hostname: 'api.openweathermap.org',

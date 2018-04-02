@@ -4,6 +4,8 @@ import Marker from '../containers/Marker';
 import InfoWindow from '../containers/InfoWindow';
 import {Jumbotron, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import getCoords from '../lib/getCoords';
+import * as errors from "../lib/errors";
 
 export default class MapContainer extends React.Component {
   bindEvents = () => {
@@ -13,7 +15,13 @@ export default class MapContainer extends React.Component {
 
     bindEvents({ mapOnClick ,markerOnClick })
   };
-  componentDidMount(){
+  async componentDidMount (){
+    const { sendError, updateMap } = this.props;
+    const coords = await getCoords();
+    if(coords instanceof Error){
+        return sendError(coords);
+    }
+    updateMap(coords);
     this.bindEvents();
   }
   render(){
