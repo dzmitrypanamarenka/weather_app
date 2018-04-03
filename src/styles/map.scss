@@ -1,0 +1,61 @@
+.container {
+  height: 100%;
+}
+
+.container > .wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.container > .jumbotron {
+  position: absolute;
+  display: flex;
+  z-index: 1;
+  top: 50%;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.container > .jumbotron > .title {
+  font-size: 50px;
+  margin: 0;
+}
+
+.container > .jumbotron > .text {
+  margin: 30px 0 40px;
+}
+
+.container > .jumbotron > .btn {
+  width: 40%;
+  background: #151515;
+  padding: 0;
+
+  &:hover {
+    background: #e70019;
+    border-color: #e70019;
+  }
+}
+
+.container > .jumbotron > .btn > .link.-weather {
+  display: flex;
+  width: 100%;
+  padding: 7px 10px;
+  justify-content: center;
+  font-weight: 600;
+  outline: none;
+  color: #fffff0;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

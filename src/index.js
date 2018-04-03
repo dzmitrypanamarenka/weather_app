@@ -8,9 +8,9 @@ import browserHistory from 'history/createBrowserHistory';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './styles/index.css';
+import './styles/fonts.css';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers/index';
-import App from './containers/App';
 import Weather from './containers/Weather';
 import MapContainer from './containers/MapContainer';
 
@@ -26,7 +26,6 @@ render(
     <Provider store={store}>
       <Router history={ history }>
         <div className="router-wrap">
-          {/*<App/>*/}
           <Route exact path="/" component={ MapContainer }/>
           <Route path="/weather" component={ Weather }/>
         </div>

@@ -2,10 +2,10 @@ import React from 'react';
 import Map from '../containers/Map';
 import Marker from '../containers/Marker';
 import InfoWindow from '../containers/InfoWindow';
-import {Jumbotron, Button} from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import getCoords from '../lib/getCoords';
-import * as errors from "../lib/errors";
+import '../styles/map.css';
 
 export default class MapContainer extends React.Component {
   bindEvents = () => {
@@ -29,10 +29,10 @@ export default class MapContainer extends React.Component {
 
     return <div className='container'>
       <Jumbotron>
-        <h1>Hi, fellow!</h1>
-        <p>Check out my amazing weather app. Buckle up and let your browser find your geoposition!</p>
+        <h1 className="title">Hi, fellow!</h1>
+        <p className="text">Check out my amazing weather app. Buckle up and let your browser find your geoposition!</p>
         <Button bsStyle="primary">
-          <Link className='link -weather' to={'weather'}>lalalal</Link>
+          <Link className='link -weather' to={'weather'}>Forecast</Link>
         </Button>
       </Jumbotron>
       <div className='wrap' id='map'>

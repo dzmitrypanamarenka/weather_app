@@ -1,0 +1,87 @@
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-image: url('https://en.climate-data.org/travel/wp-content/uploads/2017/02/weather_new-york_may.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.blur-wrap {
+  position: absolute;
+  overflow: hidden;
+  background: inherit;
+  min-height: 300px;
+  min-width: 80%;
+  border-radius: 5px;
+
+  &:before{
+    content: '';
+    background: inherit;
+    position: absolute;
+    left: -25px;
+    right: 0;
+    top: -25px;
+    bottom: 0;
+    box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+    filter: blur(10px);
+  }
+}
+
+.forecast-wrap {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: inherit;
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+  padding: 0 120px;
+
+  > .title.-temp {
+    margin: 0;
+    margin-right: 20px;
+    color: #efefef;
+    font-size: 60px;
+    font-weight: lighter;
+    letter-spacing: -5px;
+  }
+
+  > .title.-place {
+    color: #efefef;
+    margin: 0;
+    margin-right: 45px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+
+  > .image {
+    width: auto;
+    height: 55px;
+    margin-right: 20px;
+  }
+
+  > .list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  > .list > .item {
+    font-size: 14px;
+    font-weight: lighter;
+    color: #fff;
+  }
+
+  > .list > .item > .title.-data {
+    margin: 0 15px 0 5px;
+  }
+}
+
