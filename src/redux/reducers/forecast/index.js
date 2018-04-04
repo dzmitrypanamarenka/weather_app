@@ -1,5 +1,5 @@
 import {handleActions} from "redux-actions";
-import { forecastActions } from "../../actions/index";
+import { forecastActions } from "../../actions";
 
 export default handleActions({
   [forecastActions.forecastRequest](state) {

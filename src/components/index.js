@@ -1,3 +1,3 @@
 export { App } from './App';
-export { MapContainer } from './MapContainer';
+export { MapComponent } from './MapComponent';
 export { Weather } from './Weather';

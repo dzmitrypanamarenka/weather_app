@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { Jumbotron } from 'react-bootstrap';
-import { getIconLink, getCoords, getRound } from '../../utils/index';
+import { getIconLink, getCoords, getRound } from '../../utils';
 import './styles.css';
 
 export default class Weather extends Component {
   checkWeather = (coords) => {
-    this.props.receiveForecast(coords);
+    this.props.receiveForecastAsync(coords);
   };
 
   async componentDidMount() {
-    const { sendError } = this.props;
     const coords = await getCoords();
-    if (coords instanceof Error) {
-      return sendError(coords);
-    }
     this.checkWeather(coords);
   }
 
@@ -24,6 +21,7 @@ export default class Weather extends Component {
       return null;
     }
     const iconLink = getIconLink(forecastData.weather);
+
     return <div className="weather-container">
       <div className="blur-wrap">
         <Jumbotron className="forecast-wrap">
@@ -49,3 +47,9 @@ export default class Weather extends Component {
     </div>
   }
 }
+
+Weather.propTypes = {
+  forecast: PropTypes.object,
+  options: PropTypes.object,
+  receiveForecastAsync: PropTypes.func
+};

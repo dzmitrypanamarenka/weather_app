@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions/index';
+import { mapActions } from '../../redux/actions';
 import { Marker } from 'google-maps-react';
 
 const mapStateToProps = (state) => ({
@@ -10,5 +10,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    actions
+    mapActions
 )(Marker);

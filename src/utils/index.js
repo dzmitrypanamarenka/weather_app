@@ -1,13 +1,5 @@
-import getCoords from './api_utils/getCoords';
-import * as errors from './error_utils/errors';
-import getRound from './number_utils/getRound';
-import getIconLink from './url_utils/getIconLink';
-import getUrl from './url_utils/getUrl';
-
-export {
-  getCoords,
-  getRound,
-  getIconLink,
-  getUrl,
-  errors,
-}
+export { default as getCoords } from './api_utils/getCoords';
+export { default as errors } from './error_utils/errors';
+export { default as getRound } from './number_utils/getRound';
+export { default as getIconLink } from './url_utils/getIconLink';
+export { default as getUrl } from './url_utils/getUrl';

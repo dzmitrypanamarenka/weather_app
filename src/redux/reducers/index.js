@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import options from './options/index';
-import info from './info/index';
-import forecast from './forecast/index';
+import options from './options';
+import info from './info';
+import forecast from './forecast';
 
 export default combineReducers({
   options,

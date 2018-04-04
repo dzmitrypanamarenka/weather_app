@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions/index';
+import { mapActions } from '../../redux/actions';
 import { GoogleApiWrapper } from 'google-maps-react';
 import { Map } from 'google-maps-react';
 
@@ -14,5 +14,5 @@ const wrappedMap = GoogleApiWrapper({
 
 export default connect(
     mapStateToProps,
-    actions
+    mapActions
 )(wrappedMap);

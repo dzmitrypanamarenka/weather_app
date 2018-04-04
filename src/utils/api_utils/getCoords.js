@@ -1,4 +1,4 @@
-import * as errors from '../error_utils/errors';
+import errors from '../error_utils/errors';
 
 export default async () => {
   if (!navigator.geolocation) {

@@ -1,3 +1,1 @@
-import InfoWindow from './container';
-
-export default InfoWindow;
+export { default as InfoWindow } from './container';

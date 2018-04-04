@@ -1,8 +1,5 @@
 import { connect } from 'react-redux';
-import { mapActions } from '../../redux/actions/index';
-import { MapContainer } from '../../components';
-
-console.log(MapContainer)
+import { mapActions } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
   options: state.options,
@@ -11,6 +8,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-  mapActions
-)(MapContainer);
+    mapActions
+);
 

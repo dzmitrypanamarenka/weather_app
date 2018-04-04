@@ -1,26 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Map, Marker, InfoWindow } from '../../containers';
 import { Jumbotron, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getCoords } from '../../utils/index';
+import { getCoords } from '../../utils';
 import './styles.css';
 
-export default class MapContainer extends React.Component {
+export default class MapComponent extends React.Component {
   bindEvents = () => {
-    const { updateInfo, bindEvents } = this.props;
-    const markerOnClick = (props, marker) => updateInfo({ visibility: true, marker });
-    const mapOnClick = () => this.props.info.visibility ? updateInfo({ visibility: false }) : null;
+    const { updateMapInfo, bindMapEvents } = this.props;
+    const markerOnClick = (props, marker) => updateMapInfo({ visibility: true, marker });
+    const mapOnClick = () => this.props.info.visibility ? updateMapInfo({ visibility: false }) : null;
 
-    bindEvents({ mapOnClick ,markerOnClick })
+    bindMapEvents({ mapOnClick ,markerOnClick })
   };
   async componentDidMount (){
-    const { sendError, updateMap } = this.props;
+    const { sendMapError, updateMapCoords } = this.props;
     const coords = await getCoords();
-    if(coords instanceof Error){
-        return sendError(coords);
-    }
-    updateMap(coords);
+
     this.bindEvents();
+    if(coords instanceof Error){
+        return sendMapError(coords);
+    }
+    updateMapCoords(coords);
   }
   render(){
     const { content } = this.props.info;
@@ -43,6 +45,15 @@ export default class MapContainer extends React.Component {
       </div>
     </div>
   }
+};
+
+MapComponent.propTypes = {
+  info: PropTypes.object,
+  options: PropTypes.object,
+  sendMapError: PropTypes.func,
+  updateMapCoords: PropTypes.func,
+  updateMapInfo: PropTypes.func,
+  bindMapEvents: PropTypes.func
 };
 
 

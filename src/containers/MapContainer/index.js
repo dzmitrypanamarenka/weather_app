@@ -1,3 +1,1 @@
-import MapContainer from './container';
-
-export default MapContainer;
+export { default as MapContainer } from './container';
