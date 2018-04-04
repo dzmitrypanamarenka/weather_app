@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import * as actions from '../actions/';
-import Weather from '../components/Weather';
+import * as actions from '../../redux/actions/index';
+import { Weather } from '../../components/Weather';
+
+console.log(Weather)
 
 const mapStateToProps = (state) => ({
   options: state.options,

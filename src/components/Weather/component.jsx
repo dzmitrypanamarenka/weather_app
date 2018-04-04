@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import getIconLink from '../lib/getIconLink';
-import getCoords from "../lib/getCoords";
-import getRound from "../lib/getRound";
-import '../styles/weather.css';
+import { getIconLink, getCoords, getRound } from '../../utils/index';
+import './styles.css';
 
 export default class Weather extends Component {
   checkWeather = (coords) => {

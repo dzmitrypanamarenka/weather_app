@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import * as actions from '../actions/';
+import * as actions from '../../redux/actions/index';
 import { GoogleApiWrapper } from 'google-maps-react';
 import { Map } from 'google-maps-react';
 

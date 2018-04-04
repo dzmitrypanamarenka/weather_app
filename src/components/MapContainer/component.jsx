@@ -1,11 +1,9 @@
 import React from 'react';
-import Map from '../containers/Map';
-import Marker from '../containers/Marker';
-import InfoWindow from '../containers/InfoWindow';
+import { Map, Marker, InfoWindow } from '../../containers';
 import { Jumbotron, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import getCoords from '../lib/getCoords';
-import '../styles/map.css';
+import { getCoords } from '../../utils/index';
+import './styles.css';
 
 export default class MapContainer extends React.Component {
   bindEvents = () => {
