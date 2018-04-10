@@ -31,6 +31,11 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "debug": ""
+    "eslint": "eslint \"src/**/*.js\""
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.10.0"
   }
 }

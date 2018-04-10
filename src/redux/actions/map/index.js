@@ -1,4 +1,4 @@
-import {createAction} from "redux-actions";
+import { createAction } from 'redux-actions';
 
 const sendMapError = createAction('SEND_ERROR', message => ({ message }));
 const updateMapCoords = createAction('UPDATE_MAP', coords => ({ coords }));
@@ -9,5 +9,5 @@ export default {
   sendMapError,
   updateMapCoords,
   updateMapInfo,
-  bindMapEvents
-}
+  bindMapEvents,
+};

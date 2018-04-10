@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
+
 import { mapActions } from '../../redux/actions';
 
-const mapStateToProps = (state) => ({
-  options: state.options,
-  info: state.info
+const mapStateToProps = ({ mapConfig, mapInfo }) => ({
+  mapConfig,
+  mapInfo,
 });
 
 export default connect(
-    mapStateToProps,
-    mapActions
+  mapStateToProps,
+  mapActions
 );
 

@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import options from './options';
-import info from './info';
+
+import mapConfig from './mapConfig';
+import mapInfo from './mapInfo';
 import forecast from './forecast';
 
 export default combineReducers({
-  options,
-  info,
-  forecast
-})
+  mapConfig,
+  mapInfo,
+  forecast,
+});

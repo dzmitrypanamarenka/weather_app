@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
-import { mapActions } from '../../redux/actions';
 import { Marker } from 'google-maps-react';
 
-const mapStateToProps = (state) => ({
+import { mapActions } from '../../redux/actions';
+
+const mapStateToProps = ({ mapConfig: { coords, events: { markerOnClick } } }) => ({
   name: 'Your position',
-  position: state.options.coords,
-  onClick: state.options.events.markerOnClick
+  position: coords,
+  onClick: markerOnClick,
 });
 
 export default connect(
-    mapStateToProps,
-    mapActions
+  mapStateToProps,
+  mapActions
 )(Marker);

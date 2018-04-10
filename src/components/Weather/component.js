@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { Jumbotron } from 'react-bootstrap';
+
 import { getIconLink, getCoords, getRound } from '../../utils';
 import './styles.css';
 
@@ -9,13 +10,13 @@ export default class Weather extends Component {
     this.props.receiveForecastAsync(coords);
   };
 
-  async componentDidMount() {
+  async componentDidMount () {
     const coords = await getCoords();
     this.checkWeather(coords);
   }
 
-  render() {
-    const {forecastData} = this.props.forecast;
+  render () {
+    const { forecastData } = this.props.forecast;
 
     if (!forecastData) {
       return null;
@@ -44,12 +45,12 @@ export default class Weather extends Component {
           </ul>
         </Jumbotron>
       </div>
-    </div>
+    </div>;
   }
 }
 
 Weather.propTypes = {
   forecast: PropTypes.object,
-  options: PropTypes.object,
-  receiveForecastAsync: PropTypes.func
+  mapConfig: PropTypes.object,
+  receiveForecastAsync: PropTypes.func,
 };

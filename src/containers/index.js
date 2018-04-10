@@ -1,5 +1,13 @@
-export { InfoWindow } from './InfoWindow';
-export { MapContainer } from './MapContainer';
-export { Map } from './Map';
-export { Marker } from './Marker';
-export { WeatherContainer } from './Weather';
+import InfoWindow from './InfoWindow';
+import LocationContainer from './Location';
+import Map from './Map';
+import Marker from './Marker';
+import WeatherContainer from './Weather';
+
+export {
+  InfoWindow,
+  LocationContainer,
+  Map,
+  Marker,
+  WeatherContainer,
+};
