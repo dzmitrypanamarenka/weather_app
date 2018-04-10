@@ -1,3 +1,3 @@
-import Weather from './container';
+import WeatherContainer from './container';
 
-export default Weather;
+export default WeatherContainer;

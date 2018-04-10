@@ -1,15 +1,13 @@
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions/index';
-import { Weather } from '../../components/Weather';
 
-console.log(Weather)
+import { receiveForecastAsync } from '../../redux/actions';
 
-const mapStateToProps = (state) => ({
-  options: state.options,
-  forecast: state.forecast
+const mapStateToProps = ({ mapConfig, forecast }) => ({
+  mapConfig,
+  forecast,
 });
 
 export default connect(
-    mapStateToProps,
-    actions
-)(Weather);
+  mapStateToProps,
+  { receiveForecastAsync }
+);
