@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { getUrl } from '../../../utils';
-import forecastActions from './';
+import forecastActions from './actions';
 
 const { forecastFailure, forecastRequest, forecastSuccess } = forecastActions;
 

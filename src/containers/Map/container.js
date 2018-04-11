@@ -3,7 +3,7 @@ import { GoogleApiWrapper, Map } from 'google-maps-react';
 
 import { mapActions } from '../../redux/actions';
 
-const mapStateToProps = ({ mapConfig: { coords, zoom, events: { mapOnClick } } }) => ({
+const mapStateToProps = ({ mapConfig: { coords, zoom }, mapInfo: { events: { mapOnClick } } }) => ({
   zoom,
   center: coords,
   onClick: mapOnClick,

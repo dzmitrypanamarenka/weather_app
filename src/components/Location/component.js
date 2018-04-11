@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, Marker, InfoWindow } from '../../containers';
 import { Jumbotron, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { getCoords } from '../../utils';
+import { Message } from '../';
+import { Map, Marker, InfoWindow } from '../../containers';
 import './styles.css';
 
 export default class Location extends Component {
   bindEvents = () => {
-    const { updateMapInfo, bindMapEvents } = this.props;
-    const markerOnClick = (props, marker) => updateMapInfo({ visible: true, marker });
-    const mapOnClick = () => this.props.mapInfo.visible ? updateMapInfo({ visible: false }) : null;
+    const { bindMapEvents } = this.props;
+    const markerOnClick = (props, marker) => this.props.renewMapInfo({ visible: true, marker });
+    const mapOnClick = () => this.props.mapInfo.visible
+      ? this.props.renewMapInfo({ visible: false })
+      : null;
 
     bindMapEvents({ mapOnClick ,markerOnClick });
   };
-  async componentDidMount () {
-    const { sendMapError, updateMapCoords } = this.props;
-    const coords = await getCoords();
-
+  componentDidMount () {
     this.bindEvents();
-    if (coords instanceof Error) {
-      return sendMapError(coords);
-    }
-    updateMapCoords(coords);
+    this.props.receiveMapCoordsAsync();
   }
   render () {
-    const { content } = this.props.mapInfo;
-
+    const { message } = this.props.mapConfig;
     return <div className='container'>
       <Jumbotron>
         <h1 className="title">Hi, fellow!</h1>
@@ -40,7 +35,7 @@ export default class Location extends Component {
         <Map>
           <Marker/>
           <InfoWindow>
-            <span>{ content }</span>
+            <Message msg={ message }/>
           </InfoWindow>
         </Map>
       </div>
@@ -51,9 +46,8 @@ export default class Location extends Component {
 Location.propTypes = {
   mapInfo: PropTypes.object,
   mapConfig: PropTypes.object,
-  sendMapError: PropTypes.func,
-  updateMapCoords: PropTypes.func,
-  updateMapInfo: PropTypes.func,
+  receiveMapCoordsAsync: PropTypes.func,
+  renewMapInfo: PropTypes.func,
   bindMapEvents: PropTypes.func,
 };
 

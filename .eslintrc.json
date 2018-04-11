@@ -125,7 +125,7 @@
     "no-new-wrappers": 2,
     "radix": 2,
     // Naming convention
-    "id-length": 2,
+    "id-length": [2, { "exceptions": ["_", "$"] }],
     "camelcase":2,
     "new-cap": [2, { "capIsNew": false }],
     "no-underscore-dangle": 2,

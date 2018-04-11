@@ -1,11 +1,11 @@
 import forecastActions from './forecast';
-import receiveForecastAsync from './forecast/forecast_async';
 import mapActions from './map';
+import infoActions from './info';
 
 export {
   forecastActions,
-  receiveForecastAsync,
   mapActions,
+  infoActions,
 };
 
 

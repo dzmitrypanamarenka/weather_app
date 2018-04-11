@@ -3,7 +3,7 @@ import { Marker } from 'google-maps-react';
 
 import { mapActions } from '../../redux/actions';
 
-const mapStateToProps = ({ mapConfig: { coords, events: { markerOnClick } } }) => ({
+const mapStateToProps = ({ mapConfig: { coords }, mapInfo: { events: { markerOnClick } } }) => ({
   name: 'Your position',
   position: coords,
   onClick: markerOnClick,

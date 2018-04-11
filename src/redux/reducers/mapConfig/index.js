@@ -3,10 +3,14 @@ import { handleActions } from 'redux-actions';
 import { mapActions } from '../../actions';
 
 export default handleActions({
-  [mapActions.updateMapCoords] (state, { payload: { coords } }) {
+  [mapActions.updateMapRequest] (state) {
+    return { ...state, updateMapStatus: 'requesting' };
+  },
+  [mapActions.updateMapSuccess] (state, { payload: { coords } }) {
     return { ...state, coords };
   },
-  [mapActions.bindMapEvents] (state, { payload: { events } }) {
-    return { ...state, events };
+
+  [mapActions.updateMapError] (state, { payload: { message } }) {
+    return { ...state, message };
   },
-}, { zoom: 16, events: {} });
+}, { zoom: 16 });

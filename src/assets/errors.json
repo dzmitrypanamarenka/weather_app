@@ -1,0 +1,4 @@
+{
+  "failed": "Error: The Geolocation service failed",
+  "absence": "Error: Your browser doesn't support geolocation"
+}

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 
-import { mapActions } from '../../redux/actions';
+import { mapActions, infoActions } from '../../redux/actions';
+
+const { receiveMapCoordsAsync } = mapActions;
 
 const mapStateToProps = ({ mapConfig, mapInfo }) => ({
   mapConfig,
@@ -9,6 +11,9 @@ const mapStateToProps = ({ mapConfig, mapInfo }) => ({
 
 export default connect(
   mapStateToProps,
-  mapActions
+  {
+    receiveMapCoordsAsync,
+    ...infoActions,
+  }
 );
 

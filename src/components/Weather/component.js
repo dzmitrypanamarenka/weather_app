@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Jumbotron } from 'react-bootstrap';
+import _ from 'lodash';
 
-import { getIconLink, getCoords, getRound } from '../../utils';
+import { getIconLink, getRound } from '../../utils';
 import './styles.css';
 
 export default class Weather extends Component {
@@ -10,9 +11,19 @@ export default class Weather extends Component {
     this.props.receiveForecastAsync(coords);
   };
 
-  async componentDidMount () {
-    const coords = await getCoords();
+  componentDidMount () {
+    this.props.receiveMapCoordsAsync();
+    const { coords } = this.props.mapConfig;
     this.checkWeather(coords);
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    const newCoords = this.props.mapConfig.coords;
+    const actualCoords = prevProps.mapConfig.coords;
+
+    if (!_.isEqual(newCoords, actualCoords)) {
+      this.checkWeather(newCoords);
+    }
   }
 
   render () {
@@ -53,4 +64,5 @@ Weather.propTypes = {
   forecast: PropTypes.object,
   mapConfig: PropTypes.object,
   receiveForecastAsync: PropTypes.func,
+  receiveMapCoordsAsync: PropTypes.func,
 };
