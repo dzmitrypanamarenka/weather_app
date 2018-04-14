@@ -3,17 +3,25 @@ import PropTypes from 'prop-types';
 import { Jumbotron, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { InfoWindow } from 'google-maps-react';
+
+// import { MessageContainer, InfoWindowCont } from '../../containers'
+
+// import InfoWindow from '../InfoWindow';
 import { Message } from '../';
-import { Map, Marker, InfoWindow } from '../../containers';
+import { Map, Marker } from '../../containers';
 import './styles.css';
+
 
 export default class Location extends Component {
   bindEvents = () => {
     const { bindMapEvents } = this.props;
-    const markerOnClick = (props, marker) => this.props.renewMapInfo({ visible: true, marker });
-    const mapOnClick = () => this.props.mapInfo.visible
-      ? this.props.renewMapInfo({ visible: false })
-      : null;
+    const markerOnClick = ({ renewMapInfo }, marker) => renewMapInfo({ visible: true, marker });
+    const mapOnClick = ({ visible, renewMapInfo }) => (
+        visible
+        ? renewMapInfo({ visible: false })
+        : null
+    );
 
     bindMapEvents({ mapOnClick ,markerOnClick });
   };
@@ -23,6 +31,7 @@ export default class Location extends Component {
   }
   render () {
     const { message } = this.props.mapConfig;
+    const { marker, visible } = this.props.mapInfo;
     return <div className='container'>
       <Jumbotron>
         <h1 className="title">Hi, fellow!</h1>
@@ -34,8 +43,8 @@ export default class Location extends Component {
       <div className='wrap' id='map'>
         <Map>
           <Marker/>
-          <InfoWindow>
-            <Message msg={ message }/>
+          <InfoWindow marker={marker} visible={visible}>
+            <Message/>
           </InfoWindow>
         </Map>
       </div>

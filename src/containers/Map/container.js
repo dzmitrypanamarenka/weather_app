@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { GoogleApiWrapper, Map } from 'google-maps-react';
 
-import { mapActions } from '../../redux/actions';
+import { infoActions } from '../../redux/actions';
 
 const mapStateToProps = ({ mapConfig: { coords, zoom }, mapInfo: { events: { mapOnClick } } }) => ({
   zoom,
@@ -14,5 +14,5 @@ const wrappedMap = GoogleApiWrapper({
 
 export default connect(
   mapStateToProps,
-  mapActions
+  infoActions
 )(wrappedMap);

@@ -1,5 +1,5 @@
 import mapActions from './actions';
-import errors from '../../../assets/errors';
+import errors from './errors';
 
 const {
   updateMapRequest,

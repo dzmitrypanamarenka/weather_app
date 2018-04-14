@@ -32,26 +32,29 @@ export default class Weather extends Component {
     if (!forecastData) {
       return null;
     }
-    const iconLink = getIconLink(forecastData.weather);
+    const { weather, name, main, sys: { country }, wind: { speed } } = forecastData;
+    const { temp, humidity, pressure } = main;
+    const iconLink = getIconLink(weather);
+
 
     return <div className="weather-container">
       <div className="blur-wrap">
         <Jumbotron className="forecast-wrap">
-          <h2 className="title -place">{forecastData.name},{forecastData.sys.country}</h2>
-          <h1 className="title -temp">{getRound(forecastData.main.temp)}°C</h1>
+          <h2 className="title -place">{name},{country}</h2>
+          <h1 className="title -temp">{getRound(temp)}°C</h1>
           <img className="image" src={iconLink} alt=""/>
           <ul className="list">
             <li className="item">
               <span className="title">Humidity:</span>
-              <span className="title -data">{getRound(forecastData.main.humidity)}%</span>
+              <span className="title -data">{getRound(humidity)}%</span>
             </li>
             <li className="item">
               <span className="title">Pressure:</span>
-              <span className="title -data">{getRound(forecastData.main.pressure)}hPa</span>
+              <span className="title -data">{getRound(pressure)}hPa</span>
             </li>
             <li className="item">
               <span className="title">Wind:</span>
-              <span className="title -data">{getRound(forecastData.wind.speed)}m/s</span>
+              <span className="title -data">{getRound(speed)}m/s</span>
             </li>
           </ul>
         </Jumbotron>

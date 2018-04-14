@@ -4,8 +4,10 @@ import Weather from './Weather';
 import Message from './Message';
 
 export {
+  Message,
   App,
   Location,
   Weather,
-  Message,
 };
+
+export default Message
