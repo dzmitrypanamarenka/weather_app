@@ -1,5 +1,9 @@
-import {createAction} from "redux-actions";
+import receiveForecastAsync from './actions_async';
+import forecastActions from './actions';
 
-export const forecastRequest = createAction('FORECAST_REQUEST');
-export const forecastSuccess = createAction('FORECAST_SUCCESS');
-export const forecastFailure = createAction('FORECAST_FAILURE');
+export default {
+  receiveForecastAsync,
+  ...forecastActions,
+};
+
+

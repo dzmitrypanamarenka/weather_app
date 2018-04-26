@@ -7,8 +7,10 @@
     "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
     "google-maps-react": "^1.1.6",
+    "lodash": "^4.17.5",
     "node-sass-chokidar": "^1.2.2",
     "npm-run-all": "^4.1.2",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
@@ -30,6 +32,11 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "debug": ""
+    "eslint": "eslint \"src/**/*.js\""
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.10.0"
   }
 }

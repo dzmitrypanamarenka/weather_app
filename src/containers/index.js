@@ -1,13 +1,15 @@
 import InfoWindow from './InfoWindow';
-import MapContainer from './MapContainer';
+import LocationContainer from './Location';
 import Map from './Map';
 import Marker from './Marker';
-import Weather from './Weather';
+import WeatherContainer from './Weather';
+import MessageContainer from './Message';
 
 export {
   InfoWindow,
-  MapContainer,
+  LocationContainer,
   Map,
   Marker,
-  Weather,
-}
+  WeatherContainer,
+  MessageContainer,
+};

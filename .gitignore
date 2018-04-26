@@ -9,6 +9,7 @@
 # production
 /build
 /src/**/*.css
+.idea/
 
 # misc
 .DS_Store

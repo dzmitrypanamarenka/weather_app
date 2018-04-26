@@ -1,12 +1,13 @@
-import * as forecastActions from './forecast';
-import forecastAsyncActions from './forecast/forecast_async';
-import * as mapActions from './map/index';
+import forecastActions from './forecast';
+import mapActions from './map';
+import infoActions from './info';
 
 export {
   forecastActions,
-  forecastAsyncActions,
-  mapActions
-}
+  mapActions,
+  infoActions,
+};
+
 
 
 

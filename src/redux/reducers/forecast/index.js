@@ -1,14 +1,15 @@
-import {handleActions} from "redux-actions";
-import { forecastActions } from "../../actions/index";
+import { handleActions } from 'redux-actions';
+
+import { forecastActions } from '../../actions';
 
 export default handleActions({
-  [forecastActions.forecastRequest](state) {
-    return { ...state, forecastStatus: 'requesting' };
+  [forecastActions.forecastRequest] (state) {
+    return { ...state, isPending: true };
   },
-  [forecastActions.forecastSuccess](state, { payload }) {
-    return { ...state, forecastStatus: 'success', forecastData: payload };
+  [forecastActions.forecastSuccess] (state, { payload }) {
+    return { ...state, success: true, forecastData: payload };
   },
-  [forecastActions.forecastFailure](state, { payload: { error } }) {
-    return { ...state, forecastStatus: 'failure', forecastData: error}
-  }
+  [forecastActions.forecastFailure] (state, { payload: { error } }) {
+    return { ...state, success: false, forecastData: error };
+  },
 }, {});

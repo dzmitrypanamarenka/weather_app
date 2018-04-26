@@ -18,4 +18,12 @@ body {
   width: 100%;
 }
 
+.gm-style-iw {
+  text-align: center;
+}
+
+.gm-style-iw + div {
+  display: none;
+}
+
 
