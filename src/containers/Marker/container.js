@@ -1,14 +1,24 @@
 import { connect } from 'react-redux';
 import { Marker } from 'google-maps-react';
+import { compose, withHandlers, renameProp } from 'recompose';
 
-import { infoActions } from '../../redux/actions';
+import { renewMapInfo } from '../../redux/actions';
 
-const mapStateToProps = ({ mapConfig: { coords }, mapInfo: { events: { markerOnClick } } }) => ({
-  position: coords,
-  onClick: markerOnClick,
+const mapStateToProps = ({ mapConfig: { coords } }) => ({
+  coords,
 });
 
-export default connect(
-  mapStateToProps,
-  infoActions
+export default compose(
+  connect(
+    mapStateToProps,
+    {
+      renewMapInfo
+    }
+  ),
+  renameProp('coords', 'position'),
+  withHandlers({
+    onClick: ({ renewMapInfo }) => (e, marker) => (
+      renewMapInfo({ visibility: true, marker })
+    )
+  }),
 )(Marker);

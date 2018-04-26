@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
+import { compose, withProps } from 'recompose';
 
-import { mapActions } from '../../redux/actions';
+import store from '../../redux/store';
+import Message from '../../components/Message';
 
-const mapStateToProps = ({ mapConfig }) => ({
-  mapConfig,
+const mapStateToProps = ({ message: { message } }) => ({
+  message,
 });
 
-export default connect(
-  mapStateToProps,
-  mapActions
-);
+export default compose(
+  withProps({ store }),
+  connect(mapStateToProps),
+)(Message);

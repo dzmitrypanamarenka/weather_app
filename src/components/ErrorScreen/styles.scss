@@ -1,0 +1,25 @@
+.error-screen {
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-image: url('./background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  > .text.-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  > .text.-message {
+    color: #fff;
+    font-size: 18px;
+  }
+}

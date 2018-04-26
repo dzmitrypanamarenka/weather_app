@@ -4,13 +4,12 @@ import { mapActions } from '../../actions';
 
 export default handleActions({
   [mapActions.updateMapRequest] (state) {
-    return { ...state, updateMapStatus: 'requesting' };
+    return { ...state, isPending: true };
   },
   [mapActions.updateMapSuccess] (state, { payload: { coords } }) {
-    return { ...state, coords };
+    return { ...state, coords, isPending: false };
   },
-
-  [mapActions.updateMapError] (state, { payload: { message } }) {
-    return { ...state, message };
+  [mapActions.updateMapFailure] (state) {
+    return { ...state, isPending: false, failure: true };
   },
-}, { zoom: 16 });
+}, { zoom: 16, failure: false });

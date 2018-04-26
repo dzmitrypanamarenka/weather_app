@@ -1,0 +1,42 @@
+{
+  "base": "stations",
+  "clouds": {
+    "all": 40
+  },
+  "cod": 200,
+  "coord": {
+    "lat": 52.52,
+    "lon": 13.4
+  },
+  "dt": 1524669600,
+  "id": 6545310,
+  "main": {
+    "humidity": 50,
+    "pressure": 1008,
+    "temp": 14.51,
+    "temp_max": 15,
+    "temp_min": 14
+  },
+  "name": "Berlin Mitte",
+  "sys": {
+    "country": "DE",
+    "id": 4892,
+    "message": 0.0029,
+    "sunrise": 1524627968,
+    "sunset": 1524680612,
+    "type": 1
+  },
+  "weather": [
+    {
+      "description": "scattered clouds",
+      "icon": "03d",
+      "id": 802,
+      "main": "Clouds"
+    }
+  ],
+  "wind": {
+    "deg": 290,
+    "gust": 14.9,
+    "speed": 8.7
+  }
+}

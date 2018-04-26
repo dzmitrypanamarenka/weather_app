@@ -1,0 +1,6 @@
+{
+  "default": "Something goes wrong. Try later!",
+  "401": "You're not allowed to connect to weather service",
+  "503": "Weather service unavailable",
+  "504": "Can't connect to weather service"
+}

@@ -1,17 +1,20 @@
 import mapActions from './actions';
-import errors from './errors';
+import { displayMessageAction } from '../';
+import messages from './config';
 
 const {
   updateMapRequest,
   updateMapSuccess,
-  updateMapError,
+  updateMapFailure,
 } = mapActions;
 
 export default () => async (dispatch) => {
   if (!navigator.geolocation) {
-    dispatch(updateMapError(errors.absence));
+    dispatch(updateMapFailure());
+    dispatch(displayMessageAction(messages.absence));
+    return false;
   }
-  dispatch(updateMapRequest);
+  dispatch(updateMapRequest());
   try {
     const { coords } = await new Promise((res, rej) => (
       navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 })
@@ -20,8 +23,9 @@ export default () => async (dispatch) => {
       lat: coords.latitude,
       lng: coords.longitude,
     };
-    dispatch(updateMapSuccess(newCoords));
+    dispatch(updateMapSuccess({ coords: newCoords }));
   } catch (err) {
-    dispatch(updateMapError(errors.failed));
+    dispatch(updateMapFailure());
+    dispatch(displayMessageAction(messages.failed));
   }
 };

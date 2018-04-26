@@ -6,10 +6,10 @@ export default handleActions({
   [forecastActions.forecastRequest] (state) {
     return { ...state, isPending: true };
   },
-  [forecastActions.forecastSuccess] (state, { payload }) {
-    return { ...state, success: true, forecastData: payload };
+  [forecastActions.forecastSuccess] (state, { payload: { data } }) {
+    return { ...state, success: true, isPending: false, forecastData: data };
   },
-  [forecastActions.forecastFailure] (state, { payload: { error } }) {
-    return { ...state, success: false, forecastData: error };
+  [forecastActions.forecastFailure] (state) {
+    return { ...state, failure: true, isPending: false};
   },
-}, {});
+}, { failure: false });

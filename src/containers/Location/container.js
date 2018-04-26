@@ -1,19 +1,31 @@
 import { connect } from 'react-redux';
+import { compose, lifecycle } from 'recompose';
 
-import { mapActions, infoActions } from '../../redux/actions';
+import {
+  mapActions,
+  displayMessageAction
+} from '../../redux/actions';
+import messages from './config';
 
 const { receiveMapCoordsAsync } = mapActions;
-
-const mapStateToProps = ({ mapConfig, mapInfo }) => ({
-  mapConfig,
-  mapInfo,
+const mapStateToProps = ({ mapInfo, message: { message } }) => ({
+  message,
+  mapInfo
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    receiveMapCoordsAsync,
-    ...infoActions,
-  }
+export default compose(
+  connect(
+    mapStateToProps,
+    {
+      receiveMapCoordsAsync,
+      displayMessageAction,
+    }
+  ),
+  lifecycle({
+    componentDidMount () {
+      this.props.displayMessageAction(messages.default);
+      this.props.receiveMapCoordsAsync();
+    }
+  }),
 );
 
