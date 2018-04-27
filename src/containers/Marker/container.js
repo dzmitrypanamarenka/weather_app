@@ -12,13 +12,13 @@ export default compose(
   connect(
     mapStateToProps,
     {
-      renewMapInfo
+      renewMapInfo,
     }
   ),
   renameProp('coords', 'position'),
   withHandlers({
-    onClick: ({ renewMapInfo }) => (e, marker) => (
+    onClick: ({ renewMapInfo }) => (event, marker) => (
       renewMapInfo({ visibility: true, marker })
-    )
+    ),
   }),
 )(Marker);

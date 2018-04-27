@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import React from 'react';
 import {
   compose,
   lifecycle,
   withHandlers,
   branch,
-  renderComponent
+  renderComponent,
 } from 'recompose';
 
 import ErrorScreen from '../../components/ErrorScreen';
@@ -14,7 +13,7 @@ import Loader from '../../components/Loader';
 import {
   mapActions,
   forecastActions,
-  displayMessageAction
+  displayMessageAction,
 } from '../../redux/actions';
 
 const { receiveForecastAsync } = forecastActions;
@@ -35,25 +34,25 @@ export default compose(
     }
   ),
   withHandlers({
-    checkWeather: ({ receiveForecastAsync }) => coords => receiveForecastAsync(coords)
+    checkWeather: ({ receiveForecastAsync }) => coords => receiveForecastAsync(coords),
   }),
   lifecycle({
     componentDidMount () {
       this.props.displayMessageAction('');
       this.props.receiveMapCoordsAsync();
       const { coords } = this.props.mapConfig;
-      if(coords){
+      if (coords) {
         this.props.checkWeather(coords);
       }
     },
-    componentDidUpdate (prevProps, prevState) {
+    componentDidUpdate (prevProps) {
       const newCoords = this.props.mapConfig.coords;
       const actualCoords = prevProps.mapConfig.coords;
 
       if (!_.isEqual(newCoords, actualCoords)) {
         this.props.checkWeather(newCoords);
       }
-    }
+    },
   }),
   branch(
     ({ forecast: { forecastData, failure }, mapConfig }) =>

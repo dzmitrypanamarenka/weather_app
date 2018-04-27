@@ -1,5 +1,3 @@
-import configureMockStore from 'redux-mock-store';
-
 import renewMapInfo from './';
 
 describe('Info actions', () => {
@@ -11,10 +9,10 @@ describe('Info actions', () => {
         info: {
           visibility: true,
           marker: {
-            prop: 'simpleMarker'
-          }
-        }
-      }
-    })
-  })
+            prop: 'simpleMarker',
+          },
+        },
+      },
+    });
+  });
 });

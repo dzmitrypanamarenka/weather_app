@@ -10,7 +10,7 @@ describe('Info reducers', () => {
     state = messageReducer(state, action);
     const expectation = {
       ...defaultState,
-      message
+      message,
     };
     expect(state).toEqual(expectation);
   });

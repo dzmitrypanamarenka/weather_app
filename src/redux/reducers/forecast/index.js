@@ -10,6 +10,6 @@ export default handleActions({
     return { ...state, success: true, isPending: false, forecastData: data };
   },
   [forecastActions.forecastFailure] (state) {
-    return { ...state, failure: true, isPending: false};
+    return { ...state, failure: true, isPending: false };
   },
 }, { failure: false });

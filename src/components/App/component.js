@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import './styles.css';
 import '../../assets/font_styles.css';
 
-console.log(store)
 export default () => <Provider store={store}>
   <BrowserRouter>
     <div className="router-wrap">

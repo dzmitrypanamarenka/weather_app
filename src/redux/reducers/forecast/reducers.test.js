@@ -1,5 +1,5 @@
 import forecastReducers from './';
-import { forecastActions } from '../../actions'
+import { forecastActions } from '../../actions';
 
 const {
   forecastRequest,
@@ -13,7 +13,7 @@ describe('Forecast reducers', () => {
     const action = forecastRequest();
     let state = defaultState;
     state = forecastReducers(state, action);
-    const expectation = {...defaultState, isPending: true};
+    const expectation = { ...defaultState, isPending: true };
     expect(state).toEqual(expectation);
   });
   it('forecast success', () => {
@@ -25,8 +25,8 @@ describe('Forecast reducers', () => {
       isPending: false,
       success: true,
       forecastData: {
-        data: 'someData'
-      }
+        data: 'someData',
+      },
     };
     expect(state).toEqual(expectation);
   });

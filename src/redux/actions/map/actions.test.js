@@ -16,20 +16,20 @@ const {
 describe('Map actions', () => {
   it('map update request', () => {
     const action = updateMapRequest();
-    expect(action).toEqual({ type: 'UPDATE_REQUEST'})
+    expect(action).toEqual({ type: 'UPDATE_REQUEST' });
   });
   it('map update success', () => {
     const action = updateMapSuccess({ coords: 'someData' });
     expect(action).toEqual({
       type: 'UPDATE_SUCCESS',
       payload: {
-        coords: 'someData'
-      }
-    })
+        coords: 'someData',
+      },
+    });
   });
   it('map update failure', () => {
     const action = updateMapFailure();
-    expect(action).toEqual({ type: 'UPDATE_FAILURE'})
+    expect(action).toEqual({ type: 'UPDATE_FAILURE' });
   });
 });
 
@@ -42,7 +42,7 @@ describe('Map actions async', () => {
       {
         type: 'UPDATE_SUCCESS',
         payload: {
-          coords
+          coords,
         },
       },
     ];
@@ -60,7 +60,7 @@ describe('Map actions async', () => {
       {
         type: 'DISPLAY_MESSAGE',
         payload: {
-          message
+          message,
         },
       },
     ];
@@ -78,7 +78,7 @@ describe('Map actions async', () => {
       {
         type: 'DISPLAY_MESSAGE',
         payload: {
-          message
+          message,
         },
       },
     ];
@@ -86,5 +86,5 @@ describe('Map actions async', () => {
     global.navigator.geolocation = null;
     await store.dispatch(receiveMapCoordsAsync());
     expect(store.getActions()).toEqual(expectedActions);
-  })
+  });
 });

@@ -14,12 +14,11 @@ const {
 export default coords => async (dispatch) => {
   dispatch(forecastRequest());
   try {
-
     const response = await axios.get(getUrl(coords));
     dispatch(forecastSuccess(response.data));
   } catch (err) {
     let message;
-    if(err.response){
+    if (err.response) {
       const { status } = err.response;
       message = messages[status];
     }

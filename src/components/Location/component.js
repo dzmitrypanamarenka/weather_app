@@ -7,12 +7,12 @@ import {
   Map,
   Marker,
   InfoWindow,
-  MessageContainer as Message
+  MessageContainer as Message,
 } from '../../containers';
 import './styles.css';
 
-const Location = () => {
-  return <div className='container'>
+const Location = () => (
+  <div className='container'>
     <Jumbotron>
       <h1 className="title">Hi, fellow!</h1>
       <p className="text">Check out my amazing weather app. Buckle up and let your browser find your
@@ -29,8 +29,8 @@ const Location = () => {
         </InfoWindow>
       </Map>
     </div>
-  </div>;
-};
+  </div>
+);
 
 export default Location;
 

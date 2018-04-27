@@ -4,8 +4,8 @@ import { compose, withProps } from 'recompose';
 import store from '../../redux/store';
 import Message from '../../components/Message';
 
-const mapStateToProps = ({ message: { message } }) => ({
-  message,
+const mapStateToProps = ({ message }) => ({
+  ...message,
 });
 
 export default compose(

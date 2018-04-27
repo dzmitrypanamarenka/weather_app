@@ -3,14 +3,14 @@ import { compose, lifecycle } from 'recompose';
 
 import {
   mapActions,
-  displayMessageAction
+  displayMessageAction,
 } from '../../redux/actions';
 import messages from './config';
 
 const { receiveMapCoordsAsync } = mapActions;
 const mapStateToProps = ({ mapInfo, message: { message } }) => ({
   message,
-  mapInfo
+  mapInfo,
 });
 
 export default compose(
@@ -25,7 +25,7 @@ export default compose(
     componentDidMount () {
       this.props.displayMessageAction(messages.default);
       this.props.receiveMapCoordsAsync();
-    }
+    },
   }),
 );
 

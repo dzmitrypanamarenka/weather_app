@@ -1,5 +1,5 @@
 import mapConfigReducers from './';
-import { mapActions } from '../../actions'
+import { mapActions } from '../../actions';
 
 const {
   updateMapRequest,
@@ -15,12 +15,12 @@ describe('Map reducers', () => {
     state = mapConfigReducers(state, action);
     const expectation = {
       ...defaultState,
-      isPending: true
+      isPending: true,
     };
     expect(state).toEqual(expectation);
   });
   it('update map success', () => {
-    const coords = { lat: 52.520007, lng: 13.404954 }
+    const coords = { lat: 52.520007, lng: 13.404954 };
     const action = updateMapSuccess({ coords });
     let state = defaultState;
     state = mapConfigReducers(state, action);
@@ -38,7 +38,7 @@ describe('Map reducers', () => {
     const expectation = {
       ...defaultState,
       isPending: false,
-      failure: true
+      failure: true,
     };
     expect(state).toEqual(expectation);
   });

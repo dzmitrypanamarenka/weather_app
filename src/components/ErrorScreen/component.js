@@ -8,4 +8,4 @@ export default () => (
     <span className='text -title'>Oooops :/ Something goes wrong!</span>
     <Message/>
   </div>
-)
+);

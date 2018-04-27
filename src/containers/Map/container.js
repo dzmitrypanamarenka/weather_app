@@ -14,7 +14,7 @@ export default compose(
   connect(
     mapStateToProps,
     {
-      renewMapInfo
+      renewMapInfo,
     }
   ),
   GoogleApiWrapper({
@@ -26,6 +26,6 @@ export default compose(
       visibility
         ? renewMapInfo({ visibility: false })
         : null
-    )
+    ),
   })
 )(Map);

@@ -8,9 +8,9 @@ describe('Message actions', () => {
       type: 'DISPLAY_MESSAGE',
       payload: {
         message: {
-          message
-        }
-      }
-    })
-  })
+          message,
+        },
+      },
+    });
+  });
 });

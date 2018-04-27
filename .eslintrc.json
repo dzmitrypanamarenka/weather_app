@@ -16,7 +16,7 @@
     "one-var": [2, "never"],
     "no-multi-assign": 2,
     "no-plusplus": 2,
-    "operator-linebreak": 2,
+    "operator-linebreak": [2, "before"],
     // Objects
     "no-new-object": 2,
     "object-shorthand": 2,
