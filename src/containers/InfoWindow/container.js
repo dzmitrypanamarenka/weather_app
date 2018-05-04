@@ -9,7 +9,9 @@ const mapStateToProps = ({ mapInfo: { marker, visibility } }) => ({
   visibility,
 });
 
+export const withConnect = connect(mapStateToProps, mapActions);
+export const withRename = renameProp('visibility', 'visible');
 export default compose(
-  connect(mapStateToProps, mapActions),
-  renameProp('visibility', 'visible'),
+  withConnect,
+  withRename,
 )(InfoWindow);

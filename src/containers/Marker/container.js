@@ -8,17 +8,20 @@ const mapStateToProps = ({ mapConfig: { coords } }) => ({
   coords,
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    {
-      renewMapInfo,
-    }
+export const withConnect = connect(
+  mapStateToProps,
+  {
+    renewMapInfo,
+  }
+);
+export const withRename = renameProp('coords', 'position');
+export const withBindings = withHandlers({
+  onClick: ({ renewMapInfo }) => (event, marker) => (
+    renewMapInfo({ visibility: true, marker })
   ),
-  renameProp('coords', 'position'),
-  withHandlers({
-    onClick: ({ renewMapInfo }) => (event, marker) => (
-      renewMapInfo({ visibility: true, marker })
-    ),
-  }),
+});
+export default compose(
+  withConnect,
+  withRename,
+  withBindings,
 )(Marker);

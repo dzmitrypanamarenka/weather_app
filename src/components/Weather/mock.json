@@ -1,0 +1,17 @@
+{
+  "forecastData": {
+    "weather": "fine",
+    "name": "random",
+    "main": {
+      "temp": 1,
+      "humidity": 1,
+      "pressure": 1
+    },
+    "sys": {
+      "country": "DE"
+    },
+    "wind": {
+      "speed": 1
+    }
+  }
+}

@@ -2,14 +2,20 @@ import { handleActions } from 'redux-actions';
 
 import { mapActions } from '../../actions';
 
+const {
+  updateMapRequest,
+  updateMapSuccess,
+  updateMapFailure,
+} = mapActions;
+
 export default handleActions({
-  [mapActions.updateMapRequest] (state) {
+  [updateMapRequest] (state) {
     return { ...state, isPending: true };
   },
-  [mapActions.updateMapSuccess] (state, { payload: { coords } }) {
+  [updateMapSuccess] (state, { payload: { coords } }) {
     return { ...state, coords, isPending: false };
   },
-  [mapActions.updateMapFailure] (state) {
+  [updateMapFailure] (state) {
     return { ...state, isPending: false, failure: true };
   },
 }, { zoom: 16, failure: false });
