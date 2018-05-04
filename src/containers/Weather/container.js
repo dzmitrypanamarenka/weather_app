@@ -1,15 +1,68 @@
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions/index';
-import { Weather } from '../../components/Weather';
+import _ from 'lodash';
+import {
+  compose,
+  lifecycle,
+  withHandlers,
+  branch,
+  renderComponent,
+} from 'recompose';
 
-console.log(Weather)
+import ErrorScreen from '../../components/ErrorScreen';
+import Loader from '../../components/Loader';
+import {
+  mapActions,
+  forecastActions,
+  displayMessageAction,
+} from '../../redux/actions';
 
-const mapStateToProps = (state) => ({
-  options: state.options,
-  forecast: state.forecast
+const { receiveForecastAsync } = forecastActions;
+const { receiveMapCoordsAsync } = mapActions;
+
+const mapStateToProps = ({ mapConfig, forecast }) => ({
+  mapConfig,
+  forecast,
 });
 
-export default connect(
+export default compose(
+  connect(
     mapStateToProps,
-    actions
-)(Weather);
+    {
+      receiveForecastAsync,
+      receiveMapCoordsAsync,
+      displayMessageAction,
+    }
+  ),
+  withHandlers({
+    checkWeather: ({ receiveForecastAsync }) => coords => receiveForecastAsync(coords),
+  }),
+  lifecycle({
+    componentDidMount () {
+      this.props.displayMessageAction('');
+      this.props.receiveMapCoordsAsync();
+      const { coords } = this.props.mapConfig;
+      if (coords) {
+        this.props.checkWeather(coords);
+      }
+    },
+    componentDidUpdate (prevProps) {
+      const newCoords = this.props.mapConfig.coords;
+      const actualCoords = prevProps.mapConfig.coords;
+
+      if (!_.isEqual(newCoords, actualCoords)) {
+        this.props.checkWeather(newCoords);
+      }
+    },
+  }),
+  branch(
+    ({ forecast: { forecastData, failure }, mapConfig }) =>
+      !forecastData
+      && !failure
+      && !mapConfig.failure,
+    renderComponent(Loader)
+  ),
+  branch(
+    ({ mapConfig, forecast }) => mapConfig.failure || forecast.failure,
+    renderComponent(ErrorScreen)
+  )
+);

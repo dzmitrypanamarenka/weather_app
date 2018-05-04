@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 import { InfoWindow } from 'google-maps-react';
+import { compose, renameProp } from 'recompose';
 
-const mapStateToProps = (state) => ({
-  marker: state.info.marker,
-  visible: state.info.visibility
+import { mapActions } from '../../redux/actions';
+
+const mapStateToProps = ({ mapInfo: { marker, visibility } }) => ({
+  marker,
+  visibility,
 });
 
-export default connect(
-    mapStateToProps
+export default compose(
+  connect(mapStateToProps, mapActions),
+  renameProp('visibility', 'visible'),
 )(InfoWindow);

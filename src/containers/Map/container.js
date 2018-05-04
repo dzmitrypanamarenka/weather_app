@@ -1,18 +1,31 @@
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions/index';
-import { GoogleApiWrapper } from 'google-maps-react';
-import { Map } from 'google-maps-react';
+import { GoogleApiWrapper, Map } from 'google-maps-react';
+import { compose, withHandlers, renameProp } from 'recompose';
 
-const mapStateToProps = (state) => ({
-  center: state.options.coords,
-  zoom: state.options.zoom,
-  onClick: state.options.events.mapOnClick
+import { renewMapInfo } from '../../redux/actions';
+
+const mapStateToProps = ({ mapConfig: { coords, zoom }, mapInfo: { visibility } }) => ({
+  zoom,
+  visibility,
+  coords,
 });
-const wrappedMap = GoogleApiWrapper({
-  apiKey: 'AIzaSyACAE6XG5h9iiz4Mh_wprcO7eaSWHzfjAA'
-})(Map);
 
-export default connect(
+export default compose(
+  connect(
     mapStateToProps,
-    actions
-)(wrappedMap);
+    {
+      renewMapInfo,
+    }
+  ),
+  GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_APIKEY,
+  }),
+  renameProp('coords', 'center'),
+  withHandlers({
+    onClick: ({ visibility, renewMapInfo }) => () => (
+      visibility
+        ? renewMapInfo({ visibility: false })
+        : null
+    ),
+  })
+)(Map);

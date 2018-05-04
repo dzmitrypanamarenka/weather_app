@@ -1,1 +1,3 @@
-export { default as Weather } from './component';
+import Weather from './component';
+
+export default Weather;

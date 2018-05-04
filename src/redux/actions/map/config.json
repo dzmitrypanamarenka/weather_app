@@ -1,0 +1,5 @@
+{
+  "failed": "The Geolocation service failed",
+  "absence": "Your browser doesn't support geolocation",
+  "success": "You're here!"
+}

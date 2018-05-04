@@ -1,6 +1,9 @@
-import {createAction} from "redux-actions";
+import receiveMapCoordsAsync from './actions_async';
+import mapActions from './actions';
 
-export const sendMapError = createAction('SEND_ERROR', message => ({ message }));
-export const updateMapCoords = createAction('UPDATE_MAP', coords => ({ coords }));
-export const updateMapInfo = createAction('UPDATE_INFO', info => ({ info }));
-export const bindMapEvents = createAction('BIND_EVENTS', events => ({ events }));
+
+
+export default {
+  receiveMapCoordsAsync,
+  ...mapActions,
+};

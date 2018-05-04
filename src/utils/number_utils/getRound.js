@@ -1,1 +1,1 @@
-export default (prop) => Math.round(prop);
+export default prop => Math.round(prop);
