@@ -37,19 +37,26 @@ export const withBindings = withHandlers({
 });
 export const withLifecycle = lifecycle({
   componentDidMount () {
-    this.props.displayMessageAction('');
-    this.props.receiveMapCoordsAsync();
-    const { coords } = this.props.mapConfig;
+    const {
+      displayMessageAction,
+      receiveMapCoordsAsync,
+      checkWeather,
+      mapConfig,
+    } = this.props;
+    displayMessageAction('');
+    receiveMapCoordsAsync();
+    const { coords } = mapConfig;
     if (coords) {
-      this.props.checkWeather(coords);
+      checkWeather(coords);
     }
   },
   componentDidUpdate (prevProps) {
-    const newCoords = this.props.mapConfig.coords;
+    const { mapConfig, checkWeather } = this.props;
+    const { coords } = mapConfig;
     const actualCoords = prevProps.mapConfig.coords;
 
-    if (!_.isEqual(newCoords, actualCoords)) {
-      this.props.checkWeather(newCoords);
+    if (!_.isEqual(coords, actualCoords)) {
+      checkWeather(coords);
     }
   },
 });

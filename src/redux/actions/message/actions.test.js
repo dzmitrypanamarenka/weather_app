@@ -1,4 +1,4 @@
-import displayMessage from './';
+import displayMessage from './actions';
 
 describe('Message actions', () => {
   it('Display message', () => {

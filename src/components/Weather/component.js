@@ -6,7 +6,6 @@ import { getIconLink, getRound } from '../../utils';
 import './styles.css';
 
 const Weather = (props) => {
-  console.log(props)
   const { forecastData } = props.forecast;
 
   const { weather, name, main, sys: { country }, wind: { speed } } = forecastData;
