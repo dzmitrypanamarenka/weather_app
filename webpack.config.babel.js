@@ -26,6 +26,7 @@ const cssFilename = 'static/css/[name].css';
 //   : {};
 
 module.exports = {
+  mode: 'production',
   // Don't attempt to continue if there are any errors.
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
@@ -41,7 +42,7 @@ module.exports = {
     // We don't currently advertise code splitting but Webpack supports it.
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].chunk.js',
-    publicPath,
+    publicPath: '',
   },
   resolve: {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
@@ -56,7 +57,7 @@ module.exports = {
           {
             options: {
               formatter: eslintFormatter,
-              eslintPath: 'eslint',
+              eslintPath: require.resolve('eslint'),
 
             },
             loader: 'eslint-loader',
@@ -190,27 +191,27 @@ module.exports = {
     }),
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
-    new SWPrecacheWebpackPlugin({
-      // By default, a cache-busting query parameter is appended to requests
-      // used to populate the caches, to ensure the responses are fresh.
-      // If a URL is already hashed by Webpack, then there is no concern
-      // about it being stale, and the cache-busting can be skipped.
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      logger(message) {
-        if (message.indexOf('Total precache size is') === 0) {
-          // This message occurs for every build and is a bit too noisy.
-          return;
-        }
-        if (message.indexOf('Skipping static resource') === 0) {
-          // This message obscures real errors so we ignore it.
-          // https://github.com/facebookincubator/create-react-app/issues/2612
-          return;
-        }
-        console.log(message);
-      },
-      minify: true,
-    }),
+    // new SWPrecacheWebpackPlugin({
+    //   // By default, a cache-busting query parameter is appended to requests
+    //   // used to populate the caches, to ensure the responses are fresh.
+    //   // If a URL is already hashed by Webpack, then there is no concern
+    //   // about it being stale, and the cache-busting can be skipped.
+    //   dontCacheBustUrlsMatching: /\.\w{8}\./,
+    //   filename: 'service-worker.js',
+    //   logger(message) {
+    //     if (message.indexOf('Total precache size is') === 0) {
+    //       // This message occurs for every build and is a bit too noisy.
+    //       return;
+    //     }
+    //     if (message.indexOf('Skipping static resource') === 0) {
+    //       // This message obscures real errors so we ignore it.
+    //       // https://github.com/facebookincubator/create-react-app/issues/2612
+    //       return;
+    //     }
+    //     console.log(message);
+    //   },
+    //   minify: true,
+    // }),
   ],
   node: {
     dgram: 'empty',
