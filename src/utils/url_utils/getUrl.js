@@ -5,7 +5,7 @@ export default (coords) => {
   const query = querystring.stringify({
     lat: coords.lat,
     lon: coords.lng,
-    APPID: process.env.REACT_APP_APPID,
+    APPID: process.env.APPID,
     units: 'metric',
   });
   return url.format({

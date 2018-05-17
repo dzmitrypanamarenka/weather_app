@@ -42,7 +42,7 @@ describe('Forecast actions async', () => {
   const query = querystring.stringify({
     lat: coords.lat,
     lon: coords.lng,
-    APPID: process.env.REACT_APP_APPID,
+    APPID: process.env.APPID,
     units: 'metric',
   });
   const pathName = url.format({

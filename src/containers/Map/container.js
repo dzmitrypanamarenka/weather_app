@@ -17,7 +17,7 @@ export const withConnect = connect(
   }
 );
 export const withGoogleMapApi = GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_APIKEY,
+  apiKey: process.env.APIKEY,
 });
 export const withBindings = withHandlers({
   onClick: ({ visibility, renewMapInfo }) => () => (

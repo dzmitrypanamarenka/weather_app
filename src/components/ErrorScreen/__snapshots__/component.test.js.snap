@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test should match snapshot 1`] = `
+<div
+  className="error-screen"
+>
+  <span
+    className="text -title"
+  >
+    Oooops :/ Something goes wrong!
+  </span>
+  <span
+    className="text -message"
+  />
+</div>
+`;

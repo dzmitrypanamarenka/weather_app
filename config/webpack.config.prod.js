@@ -4,12 +4,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
-const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const {
-  publicPath,
   appPath,
+  buildPath,
   srcPath,
   indexHtmlPath,
 } = require('./paths');
@@ -17,37 +17,37 @@ const {
 dotenv.config();
 
 module.exports = {
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
-  entry: [
-    'babel-polyfill',
-    'react-dev-utils/webpackHotDevClient',
-    appPath
-  ],
+  mode: 'production',
+  bail: true,
+  devtool: 'source-map',
+  entry: {
+    main: [ 'babel-polyfill', appPath ]
+  },
   output: {
-    pathinfo: true,
-    filename: 'static/js/main.js',
+    path: buildPath,
+    filename: 'static/js/[name].[chunkhash].js',
     chunkFilename: 'static/js/[name].chunk.js',
-    publicPath,
+    publicPath: '',
   },
   resolve: {
     alias: {
       config$: './jest.config.js',
       react: require.resolve('react'),
     },
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
   },
   module: {
     strictExportPresence: true,
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|mjs)$/,
         enforce: 'pre',
         use: [
           {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
+
             },
             loader: 'eslint-loader',
           },
@@ -64,33 +64,24 @@ module.exports = {
             },
           },
           {
-            test: /\.(js|jsx)$/,
+            test: /\.(js|jsx|mjs)$/,
             include: srcPath,
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true,
-              presets: [
-                'es2015',
-                ['env', {
-                  targets: {
-                    node: 'current'
-                  }
-                }],
-                'stage-0',
-                'react'
-              ],
+
+              compact: true,
             },
+          },
+          {
+            test: [/\.ejs$/, /\.html$/],
+            loader: 'ejs-compiled-loader',
           },
           {
             test: /\.css$/,
             use: [
               'style-loader',
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                },
-              },
+              MiniCssExtractPlugin.loader,
+              'css-loader',
               {
                 loader: 'postcss-loader',
                 options: {
@@ -112,8 +103,8 @@ module.exports = {
             ],
           },
           {
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
             loader: 'file-loader',
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
@@ -123,43 +114,39 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({ options: {} }),
     new HtmlWebpackPlugin({
       inject: true,
       template: indexHtmlPath,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'static/css/main.[contenthash].css',
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'APPID': JSON.stringify(process.env.APPID),
         'APIKEY': JSON.stringify(process.env.APIKEY),
       }
     }),
+    new WebpackMd5Hash(),
   ],
+  target: 'web',
   node: {
     dgram: 'empty',
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
     child_process: 'empty',
-  },
-  performance: {
-    hints: false,
-  },
-  devServer: {
-    publicPath,
-    open: true,
-    port: 3000,
-    hot: true,
-    contentBase: srcPath,
-    compress: true,
-    overlay: false,
-    quiet: true,
-    watchContentBase: true,
-    historyApiFallback: true,
-    before (app) {
-      app.use(errorOverlayMiddleware());
-      app.use(noopServiceWorkerMiddleware());
-    },
   },
 };

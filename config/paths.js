@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+const path = require('path');
+const fs = require('fs');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const publicPath = '/';
@@ -8,7 +8,7 @@ const srcPath = path.join(appDirectory, 'src');
 const indexHtmlPath = path.join(appDirectory, 'public/index.html');
 const buildPath = path.join(appDirectory, 'build');
 
-export {
+module.exports = {
   publicPath,
   appPath,
   srcPath,
