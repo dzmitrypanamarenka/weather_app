@@ -8,7 +8,9 @@ const mapStateToProps = ({ message }) => ({
   ...message,
 });
 
+export const withConnect = connect(mapStateToProps);
+export const withSettedProps = withProps({ store });
 export default compose(
-  withProps({ store }),
-  connect(mapStateToProps),
+  withSettedProps,
+  withConnect,
 )(Message);

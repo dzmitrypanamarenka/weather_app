@@ -1,7 +1,7 @@
 import forecastActions from './forecast';
 import mapActions from './map';
-import renewMapInfo from './info';
-import displayMessageAction from './message';
+import renewMapInfo from './info/actions';
+import displayMessageAction from './message/actions';
 
 export {
   forecastActions,

@@ -24,45 +24,57 @@ const mapStateToProps = ({ mapConfig, forecast }) => ({
   forecast,
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    {
-      receiveForecastAsync,
-      receiveMapCoordsAsync,
+export const withConnect = connect(
+  mapStateToProps,
+  {
+    receiveForecastAsync,
+    receiveMapCoordsAsync,
+    displayMessageAction,
+  }
+);
+export const withBindings = withHandlers({
+  checkWeather: ({ receiveForecastAsync }) => coords => receiveForecastAsync(coords),
+});
+export const withLifecycle = lifecycle({
+  componentDidMount () {
+    const {
       displayMessageAction,
+      receiveMapCoordsAsync,
+      checkWeather,
+      mapConfig,
+    } = this.props;
+    displayMessageAction('');
+    receiveMapCoordsAsync();
+    const { coords } = mapConfig;
+    if (coords) {
+      checkWeather(coords);
     }
-  ),
-  withHandlers({
-    checkWeather: ({ receiveForecastAsync }) => coords => receiveForecastAsync(coords),
-  }),
-  lifecycle({
-    componentDidMount () {
-      this.props.displayMessageAction('');
-      this.props.receiveMapCoordsAsync();
-      const { coords } = this.props.mapConfig;
-      if (coords) {
-        this.props.checkWeather(coords);
-      }
-    },
-    componentDidUpdate (prevProps) {
-      const newCoords = this.props.mapConfig.coords;
-      const actualCoords = prevProps.mapConfig.coords;
+  },
+  componentDidUpdate (prevProps) {
+    const { mapConfig, checkWeather } = this.props;
+    const { coords } = mapConfig;
+    const actualCoords = prevProps.mapConfig.coords;
 
-      if (!_.isEqual(newCoords, actualCoords)) {
-        this.props.checkWeather(newCoords);
-      }
-    },
-  }),
-  branch(
-    ({ forecast: { forecastData, failure }, mapConfig }) =>
-      !forecastData
-      && !failure
-      && !mapConfig.failure,
-    renderComponent(Loader)
-  ),
-  branch(
-    ({ mapConfig, forecast }) => mapConfig.failure || forecast.failure,
-    renderComponent(ErrorScreen)
-  )
+    if (!_.isEqual(coords, actualCoords)) {
+      checkWeather(coords);
+    }
+  },
+});
+export const withLoader = branch(
+  ({ forecast: { forecastData, failure }, mapConfig }) =>
+    !forecastData
+    && !failure
+    && !mapConfig.failure,
+  renderComponent(Loader)
+);
+export const withErrorScreen = branch(
+  ({ mapConfig, forecast }) => mapConfig.failure || forecast.failure,
+  renderComponent(ErrorScreen)
+);
+export default compose(
+  withConnect,
+  withBindings,
+  withLifecycle,
+  withLoader,
+  withErrorScreen,
 );

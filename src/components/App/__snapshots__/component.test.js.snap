@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test should match snapshot 1`] = `
+<div
+  className="router-wrap"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="jumbotron"
+    >
+      <h1
+        className="title"
+      >
+        Hi, fellow!
+      </h1>
+      <p
+        className="text"
+      >
+        Check out my amazing weather app. Buckle up and let your browser find your geoposition!
+      </p>
+      <button
+        className="btn btn-primary"
+        disabled={false}
+        type="button"
+      >
+        <a
+          className="link -weather"
+          href="weather"
+          onClick={[Function]}
+        >
+          Forecast
+        </a>
+      </button>
+    </div>
+    <div
+      className="wrap"
+      id="map"
+    >
+      <div>
+        <div
+          className={undefined}
+          style={
+            Object {
+              "height": "100%",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "bottom": 0,
+                "display": "inherit",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            Loading map...
+          </div>
+        </div>
+        <div />
+      </div>
+    </div>
+  </div>
+</div>
+`;

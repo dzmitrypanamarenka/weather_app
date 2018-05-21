@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test should match snapshot 1`] = `
+<div
+  className="weather-container"
+>
+  <div
+    className="blur-wrap"
+  >
+    <div
+      className="forecast-wrap jumbotron"
+    >
+      <h2
+        className="title -place"
+      >
+        random
+        ,
+        DE
+      </h2>
+      <h1
+        className="title -temp"
+      >
+        1
+        °C
+      </h1>
+      <img
+        alt=""
+        className="image"
+        src="http://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/undefined.png"
+      />
+      <ul
+        className="list"
+      >
+        <li
+          className="item"
+        >
+          <span
+            className="title"
+          >
+            Humidity:
+          </span>
+          <span
+            className="title -data"
+          >
+            1
+            %
+          </span>
+        </li>
+        <li
+          className="item"
+        >
+          <span
+            className="title"
+          >
+            Pressure:
+          </span>
+          <span
+            className="title -data"
+          >
+            1
+            hPa
+          </span>
+        </li>
+        <li
+          className="item"
+        >
+          <span
+            className="title"
+          >
+            Wind:
+          </span>
+          <span
+            className="title -data"
+          >
+            1
+            m/s
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

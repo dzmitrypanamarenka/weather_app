@@ -10,22 +10,26 @@ const mapStateToProps = ({ mapConfig: { coords, zoom }, mapInfo: { visibility } 
   coords,
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    {
-      renewMapInfo,
-    }
+export const withConnect = connect(
+  mapStateToProps,
+  {
+    renewMapInfo,
+  }
+);
+export const withGoogleMapApi = GoogleApiWrapper({
+  apiKey: process.env.APIKEY,
+});
+export const withBindings = withHandlers({
+  onClick: ({ visibility, renewMapInfo }) => () => (
+    visibility
+      ? renewMapInfo({ visibility: false })
+      : null
   ),
-  GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_APIKEY,
-  }),
-  renameProp('coords', 'center'),
-  withHandlers({
-    onClick: ({ visibility, renewMapInfo }) => () => (
-      visibility
-        ? renewMapInfo({ visibility: false })
-        : null
-    ),
-  })
+});
+export const withRename = renameProp('coords', 'center');
+export default compose(
+  withConnect,
+  withGoogleMapApi,
+  withRename,
+  withBindings
 )(Map);

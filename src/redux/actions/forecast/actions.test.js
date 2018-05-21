@@ -19,18 +19,18 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Forecast actions', () => {
-  it('forecast request', () => {
+  it('forecast request should be sent', () => {
     const action = forecastRequest();
     expect(action).toEqual({ type: 'FORECAST_REQUEST' });
   });
-  it('forecast success', () => {
+  it('forecast data should be received successfuly', () => {
     const action = forecastSuccess({ data: 'someData' });
     expect(action).toEqual({
       type: 'FORECAST_SUCCESS',
       payload: { data: { data: 'someData' } },
     });
   });
-  it('forecast failure', () => {
+  it('forecast request failure information should be sent', () => {
     const action = forecastFailure();
     expect(action).toEqual({ type: 'FORECAST_FAILURE' });
   });
@@ -42,20 +42,24 @@ describe('Forecast actions async', () => {
   const query = querystring.stringify({
     lat: coords.lat,
     lon: coords.lng,
-    APPID: process.env.REACT_APP_APPID,
+    APPID: process.env.APPID,
     units: 'metric',
   });
   const pathName = url.format({
     pathname: '/data/2.5/weather',
     search: query,
   });
+  let store;
 
   beforeAll(() => {
     axios.defaults.adapter = httpAdapter;
   });
 
-  it('forecast async success', async () => {
-    const store = mockStore({ data: {} });
+  beforeEach(() => {
+    store = mockStore({ data: {} });
+  });
+
+  it('async request to weather service api', async () => {
     const expectedActions = [
       { type: 'FORECAST_REQUEST' },
       { type: 'FORECAST_SUCCESS', payload: { data: mock } },
@@ -70,8 +74,7 @@ describe('Forecast actions async', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('forecast async fail', async () => {
-    const store = mockStore({ data: {} });
+  it('failure of async request to weather service api', async () => {
     const expectedActions = [
       { type: 'FORECAST_REQUEST' },
       { type: 'FORECAST_FAILURE' },

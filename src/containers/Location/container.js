@@ -13,19 +13,23 @@ const mapStateToProps = ({ mapInfo, message: { message } }) => ({
   mapInfo,
 });
 
+export const withConnect = connect(
+  mapStateToProps,
+  {
+    receiveMapCoordsAsync,
+    displayMessageAction,
+  }
+);
+export const withLifecycle = lifecycle({
+  componentDidMount () {
+    const { displayMessageAction, receiveMapCoordsAsync } = this.props;
+    const { defaultMsg } = messages;
+    displayMessageAction(defaultMsg);
+    receiveMapCoordsAsync();
+  },
+});
 export default compose(
-  connect(
-    mapStateToProps,
-    {
-      receiveMapCoordsAsync,
-      displayMessageAction,
-    }
-  ),
-  lifecycle({
-    componentDidMount () {
-      this.props.displayMessageAction(messages.default);
-      this.props.receiveMapCoordsAsync();
-    },
-  }),
+  withConnect,
+  withLifecycle,
 );
 

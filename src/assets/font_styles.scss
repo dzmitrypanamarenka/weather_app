@@ -2,12 +2,14 @@
   font-weight: 400;
   font-family: 'Arial';
   font-style: normal;
-  src: url('fonts/Arial.woff'), url('fonts/Arial.ttf');
+  src: url('fonts/Arial.woff') format('font-woff'),
+       url('fonts/Arial.ttf') format('ttf');
 }
 
 @font-face {
   font-weight: 400;
   font-family: 'Helvetica';
   font-style: normal;
-  src: url('fonts/helvetica.woff'), url('fonts/helvetica.ttf');
+  src: url('./fonts/helvetica.woff') format('woff'),
+       url('./fonts/helvetica.ttf') format('ttf');
 }

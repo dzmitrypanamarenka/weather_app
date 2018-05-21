@@ -3,6 +3,7 @@ import Location from './Location';
 import Weather from './Weather';
 import Message from './Message';
 import ErrorScreen from './ErrorScreen';
+import Loader from './Loader';
 
 export {
   Message,
@@ -10,4 +11,5 @@ export {
   Location,
   Weather,
   ErrorScreen,
+  Loader,
 };
